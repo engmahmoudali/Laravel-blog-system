@@ -15,14 +15,15 @@
                     <td>{{ $post->date }}</td>
                     <td>{{ $post->author }}</td>
                     <td>
-                        <a href="#" class="btn btn-primary">Show</a>
-                        <a href="{{ route('posts.edit', $post->slug) }}" class="btn btn-info">Edit</a>
-                        <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" wire:click="selected('{{ $post->uuid }}')">Delete</button>
+                        <a href="{{ route('post', $post->slug) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                        <a href="{{ route('posts.edit', $post->slug) }}" class="btn btn-info"><i class="fa fa-edit"></i></a>
+                        <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" wire:click="selected('{{ $post->uuid }}')"><i class="fa fa-trash"></i></button>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+    {{ $posts->links() }}
 <!-- Modal -->
 <div wire:ignore.self class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -41,4 +42,18 @@
       </div>
     </div>
   </div>
+  @push('scripts')
+   
+      <script>
+        window.addEventListener('danger',e => {
+          Swal.fire({
+          icon: 'error',
+          title: 'Deleted',
+          text: e.detail.title,
+          });
+        });
+        
+      </script>
+  
+  @endpush
 </div>

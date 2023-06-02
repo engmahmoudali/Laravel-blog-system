@@ -19,4 +19,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('posts', PostController::class);
+Route::resource('posts', PostController::class)->except('show');

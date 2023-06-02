@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\AlphaSpaces;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdatePostRequest extends FormRequest
@@ -22,10 +23,11 @@ class UpdatePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'nullable|unique:posts,title,'.$this->id.',id|alpha:ascii',
+            // 'title' => 'nullable|unique:posts,title,'.$this->title.',title|alpha:ascii',
+            'title' => ['required', 'unique:posts,title,'.$this->title.',title', new AlphaSpaces], // Using it if you want An ASCII with Spaces
             // 'slug' => 'nullable|unique:posts,slug,'.$this->id.',id',
             'content' => 'nullable|min:20',
-            'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg,webp',
+            'photo' => 'nullable|image|max:2048|mimes:jpeg,png,jpg,webp',
         ];
     }
 }

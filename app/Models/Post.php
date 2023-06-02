@@ -63,7 +63,14 @@ class Post extends BaseModel
         return 'slug';
     }
 
-    // /**
-    //  * Booted method for deleting all comments related to this post if this post is being deleted. 
-    //  */
+    /**
+     * Booted method for deleting all comments related to this post if this post is being deleted. 
+     */
+    public static function boot()
+    {
+        parent::boot();
+        static::deleted(function ($model) {
+            $model->comments()->delete();
+        });
+    }
 }

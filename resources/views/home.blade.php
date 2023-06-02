@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    Total Posts: {{ \App\Models\Post::count() }}
                 </div>
             </div>
         </div>

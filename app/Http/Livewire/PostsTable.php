@@ -4,17 +4,19 @@ namespace App\Http\Livewire;
 
 use App\Models\Post;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class PostsTable extends Component
 {
-    public $posts;
+    use WithPagination;
+
+    protected $paginationTheme = 'bootstrap';
 
     public $post;
 
     public function render()
     {
-        $this->posts = Post::all();
-        return view('livewire.posts-table');
+        return view('livewire.posts-table', ['posts' => Post::latest()->paginate(10)]);
     }
 
     public function selected($post)
@@ -24,7 +26,10 @@ class PostsTable extends Component
 
     public function delete()
     {
-        Post::where('uuid',$this->post)->delete();
-        session()->flash('danger', 'The post has been deleted');
+        $post = Post::where('uuid',$this->post)->first();
+        deleteImage($post->image);
+        $post->comments()->delete();
+        $post->delete();
+        $this->dispatchBrowserEvent('danger', ['title' => 'The post has been deleted']);
     }
 }

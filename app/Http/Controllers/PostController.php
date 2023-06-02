@@ -33,7 +33,7 @@ class PostController extends Controller
         if ($request->hasFile('photo')) {
             $request['image'] = storeImage($request->file('photo'), 'posts');
         }
-        $request['slug'] = createSlug($request->title);
+        $request['slug'] = $this->createSlug($request->title);
         Post::create($request->only('title','slug','content','image', 'user_id'));
         return redirect()->route('posts.index')->with('success', 'The post saved successfully');
     }
@@ -59,7 +59,11 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        $post->update($request->only('title','slug','content'));
+        $request['slug'] = $this->createSlug($request->title);
+        if ($request->hasFile('photo')) {
+            $request['image'] = updateImages($post->image, $request->file('photo'), 'posts');
+        }
+        $post->update($request->only('title','image','slug','content'));
         return redirect()->route('posts.index')->with('success', 'The post updated successfully');
     }
 
@@ -68,6 +72,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        deleteImage($post->image);
         $post->delete();
         return redirect()->back()->with('danger', 'The post has been deleted');
     }

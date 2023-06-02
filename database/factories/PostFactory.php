@@ -17,9 +17,11 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+        $slug = fake()->unique()->slug();
+        $title = implode(' ', explode('-', $slug));
         return [
-            'title' => fake()->unique()->realText(40),
-            'slug' => fake()->unique()->slug(),
+            'title' => $title,
+            'slug' => $slug,
             'content' => fake()->realText(200),
             'user_id' => fake()->randomElement(User::all())['id'],
         ];

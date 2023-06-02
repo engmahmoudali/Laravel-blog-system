@@ -1,4 +1,3 @@
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
@@ -23,3 +22,19 @@
     }
 </script>
 @stack('scripts')
+<script>
+    @if (Session::has('success'))
+    Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: '{{ Session::get('success') }}',
+        });
+
+    @elseif (Session::has('danger'))
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: '{{ Session::get('danger') }}',
+        });
+    @endif
+</script>

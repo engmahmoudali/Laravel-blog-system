@@ -13,6 +13,7 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
     @include('layouts.css')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @livewireStyles
 </head>
 <body>

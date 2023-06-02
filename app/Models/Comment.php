@@ -23,4 +23,20 @@ class Comment extends BaseModel
         return $this->created_at->format('Y-m-d');
     }
 
+    /**
+     * Relate a comment with its writer.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Relate a comment with its post.
+     */
+    public function post()
+    {
+        return $this->belongsTo(Post::class);
+    }
+
 }

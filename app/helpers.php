@@ -30,8 +30,8 @@ if (!function_exists('uploadFile')) {
 if (!function_exists('updateImages')) {
     function updateImages($oldPhoto, $newPhoto, $path)
     {
-        if (File::exists('storage/'.$path.$oldPhoto)){
-            File::delete('storage/'.$path.$oldPhoto);
+        if (File::exists('storage/'.$oldPhoto)){
+            File::delete('storage/'.$oldPhoto);
         }
 
         return storeImage($newPhoto, $path);
@@ -47,22 +47,12 @@ if (!function_exists('updateImages')) {
  */
 
 if (!function_exists('deleteImage')) {
-    function deleteImage($oldPhoto,$path)
+    function deleteImage($oldPhoto)
     {
-        if (File::exists('storage/'.$path.$oldPhoto)){
-            File::delete('storage/'.$path.$oldPhoto);
+        if (File::exists('storage/'.$oldPhoto)){
+            File::delete('storage/'.$oldPhoto);
         }
 
         return true;
     }
-}
-
-/**
- * Creating a slug for a given title.
- */
-if (!function_exists('createSlug')) {
-    function createSlug($str, $delimiter = '-'){
-        $slug = strtolower(trim(preg_replace('/[\s-]+/', $delimiter, preg_replace('/[^A-Za-z0-9-]+/', $delimiter, preg_replace('/[&]/', 'and', preg_replace('/[\']/', '', iconv('UTF-8', 'ASCII//TRANSLIT', $str))))), $delimiter));
-        return $slug;
-    } 
 }
