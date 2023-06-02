@@ -13,7 +13,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        return view('posts.index');
     }
 
     /**
@@ -21,7 +21,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -29,7 +29,13 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        //
+        $request['user_id'] = auth()->user()->id;
+        if ($request->hasFile('photo')) {
+            $request['image'] = storeImage($request->file('photo'), 'posts');
+        }
+        $request['slug'] = createSlug($request->title);
+        Post::create($request->only('title','slug','content','image', 'user_id'));
+        return redirect()->route('posts.index')->with('success', 'The post saved successfully');
     }
 
     /**
@@ -37,7 +43,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('posts.show', compact('post'));
     }
 
     /**
@@ -45,7 +51,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -53,7 +59,8 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        $post->update($request->only('title','slug','content'));
+        return redirect()->route('posts.index')->with('success', 'The post updated successfully');
     }
 
     /**
@@ -61,6 +68,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect()->back()->with('danger', 'The post has been deleted');
     }
+
 }

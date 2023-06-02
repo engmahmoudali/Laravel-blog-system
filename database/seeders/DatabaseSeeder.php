@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,5 +21,12 @@ class DatabaseSeeder extends Seeder
             'name' => 'Mahmoud Ali',
             'email' => 'admin@admin.com'
         ]);
+
+        // Create a random posts for database testing.
+        Post::factory()->count(20)->create();
+
+        // Create a random comments for database testing.
+        Comment::factory()->count(120)->create();
+
     }
 }
