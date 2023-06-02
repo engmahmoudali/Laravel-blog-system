@@ -1,4 +1,4 @@
-# ![Blog System App]
+# Blog System App
 
 ## About The Project
 This Project is made as a task ordered from me to some company .
