@@ -1,4 +1,4 @@
-# ![Blog System App](logo.png)
+# ![Blog System App]
 
 ## About The Project
 This Project is made as a task ordered from me to some company .
@@ -12,7 +12,7 @@ I used Laravel Framework v10 with some packages as:
 
 ## Installation Laravel
 
-Please check the official laravel installation guide for server requirements before you start. [Official Documentation](https://laravel.com/docs/5.4/installation#installation)
+Please check the official laravel installation guide for server requirements before you start. [Official Documentation](https://laravel.com/docs/10.x/installation)
 Clone the repository
 
     git clone https://github.com/engmahmoudali/blog blog
@@ -47,3 +47,5 @@ You can now access the server at http://localhost:8000
 ## License
 
 This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Author :- [Mahmoud Ali](https://engmahmoudali.com)
