@@ -15,11 +15,11 @@ I used Laravel Framework v10 with some packages as:
 Please check the official laravel installation guide for server requirements before you start. [Official Documentation](https://laravel.com/docs/10.x/installation)
 Clone the repository
 
-    git clone https://github.com/engmahmoudali/blog blog
+    git clone https://github.com/engmahmoudali/Laravel-blog-system
 
 Switch to the repo folder
 
-    cd blog
+    cd Laravel-blog-system
 
 Install all the dependencies using composer
 
